@@ -1,0 +1,75 @@
+@use "variables";
+
+$gap-y: variables.$padding-page-md;
+$gap-y-lg: calc($gap-y * 1.5);
+
+/* ==========================================================================
+   Course syllabus page
+   ========================================================================== */
+
+#content-wrapper > #content {
+  // Course title
+  div.ic-Action-header {
+    margin-bottom: $gap-y-lg;
+
+    h1 {
+      font-size: 2em;
+      font-weight: bold;
+      line-height: 1.15;
+    }
+  }
+
+  // Syllabus content
+  #course_syllabus > div {
+    // Section title
+    > p > span {
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    // Section content
+    > table {
+      border: 0px solid white;
+      > tbody > tr {
+        // Title row (hiddem)
+        &:first-child {
+          display: none;
+        }
+
+        // Table cells
+        > td {
+          background: white;
+          line-height: 1.5;
+          padding: 8px 0;
+          vertical-align: top;
+
+          // Header column
+          &:first-child {
+            font-weight: bold;
+            text-align: left;
+            width: 125px;
+
+            @media screen and (min-width: 768px) {
+              width: 150px;
+            }
+            @media screen and (min-width: 1366px) {
+              width: 175px;
+            }
+          }
+
+          // Content columns
+          &:not(:first-child) {
+            border-top: 1px solid #eaeaea;
+            padding-left: 4px;
+            text-align: left;
+          }
+        }
+
+        // First content row (2nd row) > Value cells
+        &:nth-child(2) > td:not(:first-child) {
+          border-top: none; // Remove the border
+        }
+      }
+    }
+  }
+}
