@@ -79,6 +79,7 @@ $course-menu-width: 180px;
     }
 
     /* Main content --------------------------------------------------------- */
+    // Note: This section of code is shared by Course, Assignment
     div#content {
       margin-top: $gap-y-lg;
 
@@ -95,6 +96,8 @@ $course-menu-width: 180px;
           input {
             border-radius: variables.$radius-md;
             display: block;
+            margin: 0;
+            transition: none;
           }
         }
 
@@ -110,7 +113,7 @@ $course-menu-width: 180px;
       }
 
       // Module items
-      #context_modules .context_module {
+      .item-group-condensed {
         border-radius: variables.$radius-md;
         margin: 0;
         margin-top: $gap-y-lg;
@@ -124,7 +127,7 @@ $course-menu-width: 180px;
         }
 
         // Module title container
-        div.header {
+        div.ig-header {
           border: none;
           margin: 0;
           padding: 0;
@@ -135,24 +138,42 @@ $course-menu-width: 180px;
         }
 
         // Module items
-        div.content > ul.items > li > div.ig-row {
-          border: none;
-          border-bottom: 1px solid #ededed;
-          font-size: 14px;
-          padding: 5px 8px;
+        div:is(.content, .assignment-list) {
+          > ul > li > div.ig-row {
+            border: none;
+            border-bottom: 1px solid #ededed;
+            font-size: 14px;
 
-          span {
-            font-size: 16px;
-            line-height: 2em;
+            // Icon & e.g. Course content items
+            span:is(.type_icon, .item_name) {
+              font-size: 16px;
+              line-height: 2em;
+              margin-bottom: 2px;
+            }
+
+            // e.g. Assignment titles
+            a.ig-title {
+              display: block;
+              font-size: 16px;
+            }
+
+            // e.g. Assignment due dates
+            div.ig-details {
+              font-size: 14px;
+            }
+          }
+
+          > ul > li:last-child > div {
+            border-bottom: none; // Remove border from last module item
+          }
+
+          > ul + .footer {
+            display: none; // Hide the footer
           }
         }
 
-        div.content > ul.items li:last-child > div {
-          border-bottom: none; // Remove border from last module item
-        }
-
-        div.content > ul.items + .footer {
-          display: none; // Hide the footer
+        div.content > ul > li > div.ig-row {
+          padding: 5px 8px; // This is only for course page, assignment needs larger vertical padding
         }
       }
     }
