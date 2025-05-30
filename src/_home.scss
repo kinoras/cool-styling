@@ -1,0 +1,282 @@
+@use "variables";
+
+$gap-x: variables.$padding-page-md;
+$gap-y: variables.$padding-page-md;
+
+.box-title-text {
+  border-bottom: none;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   Home page
+   ========================================================================== */
+
+#wrapper {
+  overflow-x: hidden;
+  padding: variables.$padding-page-sm;
+  transition: variables.$transition;
+
+  // For desktop view
+  @media screen and (min-width: 768px) {
+    margin-left: variables.$padding-page-md + variables.$header-width-compact; // Space for the header
+    padding: variables.$padding-page-md;
+  }
+
+  // Content
+  #main div.ic-app-main-content {
+    gap: $gap-x;
+
+    /* Main content (left)
+       ---------------------------------------------------------------------- */
+    #content-wrapper {
+      div#content {
+        padding: 0;
+
+        // Home page: Dashboard
+        #dashboard {
+          margin: 0;
+
+          // Dashboard title bar (hidden)
+          #dashboard_header_container .ic-Dashboard-header__layout {
+            background: transparent;
+            border-bottom: none;
+            float: right;
+            min-height: 0;
+            padding: 10px 16px 0 0;
+
+            button {
+              opacity: 0.05; // Make the dashboard view switch slightly visible
+            }
+          }
+
+          // Dashboard card boxes
+          #DashboardCard_Container .ic-DashboardCard__box {
+            border-radius: variables.$radius-lg;
+            box-shadow: variables.$shadow-md;
+            padding: 6px 8px;
+            margin-bottom: $gap-y; // Space between boxes
+
+            // Card box title bar
+            h2.ic-DashboardCard__box__header {
+              @extend .box-title-text;
+              margin: 8px;
+            }
+
+            // Placeholder for empty card boxes
+            h2.ic-DashboardCard__box__header + span {
+              display: inline-block;
+              margin: 0px 0px 8px 8px;
+            }
+
+            div.ic-DashboardCard__box__container {
+              margin: 0;
+
+              // Dashboard cards
+              div.ic-DashboardCard {
+                border: 2px solid white;
+                border-radius: variables.$radius-md;
+                box-shadow: none;
+                display: flex;
+                margin: 3px 0;
+                padding: 10px;
+                transition: variables.$transition;
+                width: 100%;
+
+                // Course info container
+                div.ic-DashboardCard__header {
+                  display: flex;
+                  flex: 1;
+
+                  // Color bar on the left (originally top)
+                  div.ic-DashboardCard__header_hero {
+                    border-radius: 300px;
+                    height: 100%;
+                    opacity: 0.5;
+                    transition: variables.$transition;
+                    width: 5px;
+                  }
+                  .ic-DashboardCard__header_image {
+                    background-image: none; // Hide the image
+                  }
+
+                  // Course info
+                  a.ic-DashboardCard__link {
+                    display: block;
+                    flex: 1;
+                    padding: 0 5px 0 12px;
+                    text-decoration: none;
+
+                    div.ic-DashboardCard__header_content {
+                      padding: 0;
+
+                      // Course title
+                      h3.ic-DashboardCard__header-title {
+                        font-size: 26px;
+                        line-height: 28px;
+                        white-space: normal;
+                      }
+                    }
+                  }
+
+                  // Course card action button
+                  .ic-DashboardCard__header-button {
+                    opacity: 0.05;
+                  }
+                }
+
+                // Course links
+                nav.ic-DashboardCard__action-container {
+                  align-self: center;
+                  padding-bottom: 4px;
+                  margin: 0;
+                  > a {
+                    display: inline-block;
+                    outline: none;
+                    padding: 0 10px;
+                  }
+                }
+
+                &:hover {
+                  border: 2px solid rgba(0, 0, 0, 0.06);
+                  div.ic-DashboardCard__header_hero {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* Sidebar (right)
+       ---------------------------------------------------------------------- */
+    #right-side-wrapper {
+      padding: 0px;
+      transition: variables.$transition;
+
+      // Larger sidebar for wider screens
+      @media screen and (min-width: 1366px) {
+        width: 300px;
+      }
+
+      @media screen and (min-width: 1920px) {
+        width: 330px;
+      }
+
+      aside#right-side {
+        /* Todo list container ---------------------------------------------- */
+        div.Sidebar__TodoListContainer {
+          border-radius: variables.$radius-lg;
+          box-shadow: variables.$shadow-md;
+          padding: 14px 16px;
+
+          // Section title bar
+          h2.todo-list-header {
+            @extend .box-title-text;
+            margin: 0 0 8px 0;
+            padding: 0;
+          }
+
+          // Placeholder for empty todo
+          h2.todo-list-header + span {
+            display: inline-block;
+            margin: 0;
+          }
+
+          // Todo list
+          ul#planner-todosidebar-item-list {
+            margin-left: 0;
+
+            // Todo items
+            li > .ToDoSidebarItem {
+              font-weight: 500;
+              margin-bottom: 8px;
+
+              div.ToDoSidebarItem__Info {
+                div.ToDoSidebarItem__Title > a {
+                  font-weight: 600;
+                  padding: 0;
+                }
+              }
+
+              div.ToDoSidebarItem__Close {
+                font-size: 14px;
+                width: 25px;
+              }
+            }
+          }
+        }
+
+        /* Recent feedback list container ----------------------------------- */
+        div.recent_feedback {
+          border-radius: variables.$radius-lg;
+          box-shadow: variables.$shadow-md;
+          padding: 14px 16px 18px;
+          margin-top: $gap-y;
+
+          // Section title bar
+          .h2.shared-space {
+            border-bottom: none;
+            margin-bottom: 8px;
+            padding: 0;
+
+            h2 {
+              @extend .box-title-text;
+              display: block;
+              margin: 0;
+            }
+          }
+
+          // Recent feedback list
+          ul.right-side-list {
+            margin: 0;
+
+            li {
+              a {
+                margin: 0 0 8px;
+                padding: 4px 0 0;
+
+                // Tick mark
+                i.icon-check {
+                  padding-right: 9px;
+                }
+
+                b.recent_feedback_title {
+                  font-weight: 500;
+                }
+              }
+
+              &:last-child a {
+                margin-bottom: 2px; // Less space for the last item
+              }
+            }
+          }
+        }
+
+        /* Grey buttons ----------------------------------------------------- */
+        a.button-sidebar-wide {
+          border-radius: variables.$radius-sm;
+          font-size: 14px;
+          line-height: 20px;
+          margin-bottom: 8px;
+
+          i {
+            margin: 0 6px 0 0;
+            translate: 0 -2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Additional margin for expanded header
+   ========================================================================== */
+body.primary-nav-expanded #wrapper {
+  @media (min-width: 768px) {
+    margin-left: 102px;
+  }
+}

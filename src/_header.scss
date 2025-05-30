@@ -1,0 +1,70 @@
+@use "variables";
+
+$header-padding: 5px;
+$link-height-compact: 48px;
+$link-height-expanded: 65px;
+
+/* ==========================================================================
+   Header (Desktop)
+   ========================================================================== */
+
+#header {
+  border-radius: variables.$radius-lg;
+  box-shadow: variables.$shadow-lg;
+  color: black;
+  height: calc(100% - variables.$padding-page-md * 2);
+  margin: variables.$padding-page-md;
+  padding: $header-padding;
+  transition: variables.$transition;
+  width: variables.$header-width-compact;
+
+  // NTU COOL logo
+  a.ic-app-header__logomark {
+    background-size: 85%;
+    border-radius: variables.$radius-md;
+    transition: variables.$transition;
+  }
+
+  // Menu item links
+  a.ic-app-header__menu-list-link {
+    align-items: center;
+    border-radius: calc(variables.$radius-lg - $header-padding);
+    display: flex;
+    flex-direction: column;
+    height: $link-height-compact;
+    justify-content: center;
+    margin-bottom: 5px;
+    transition: variables.$transition;
+
+    // Link icons
+    div.menu-item-icon-container {
+      margin-top: -2px;
+      transition: variables.$transition;
+    }
+
+    &:is(:active, :focus) {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+/* Expanded header
+   ========================================================================== */
+@media (min-width: 768px) {
+  body.primary-nav-expanded {
+    #header {
+      width: variables.$header-width-expanded;
+
+      // Menu item links
+      a.ic-app-header__menu-list-link {
+        height: $link-height-expanded;
+
+        // Link icons
+        div.menu-item-icon-container {
+          margin-top: 3px;
+        }
+      }
+    }
+  }
+}
