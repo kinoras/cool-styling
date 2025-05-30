@@ -1,0 +1,200 @@
+@use "variables";
+
+$gap-x: variables.$padding-page-md;
+$gap-y: variables.$padding-page-md;
+$gap-y-lg: calc($gap-y * 1.5);
+
+$course-header-height: 72px;
+$course-menu-width: 180px;
+
+/* ==========================================================================
+   Course page
+   ========================================================================== */
+
+#wrapper {
+  /* Title bar
+     ------------------------------------------------------------------------ */
+  .ic-app-nav-toggle-and-crumbs {
+    border-bottom: 1px solid #eaeaea;
+    min-height: $course-header-height;
+    margin: 0;
+    margin-top: -1 * variables.$padding-page-md; // For sticky effect
+    padding-top: variables.$padding-page-md;
+
+    // Trick to hide the shadow of sidebar elements
+    &::after {
+      background: white;
+      bottom: 0;
+      content: "" !important;
+      position: absolute;
+      right: -1 * variables.$padding-page-md;
+      top: 0;
+      width: variables.$padding-page-md;
+    }
+
+    // Toogle button
+    #courseMenuToggle {
+      margin-right: 0;
+      transform: scale(0.8);
+    }
+
+    // Breadcrumbs
+    .ic-app-crumbs {
+      flex: unset;
+    }
+  }
+
+  /* Content
+     ------------------------------------------------------------------------ */
+  .ic-app-nav-toggle-and-crumbs + #main {
+    margin-left: 4px;
+    transition: variables.$transition;
+
+    /* Left side menu ------------------------------------------------------- */
+    div#left-side {
+      width: $course-menu-width;
+
+      #sticky-container {
+        padding: 0;
+        padding-top: $gap-y-lg;
+        top: $course-header-height;
+
+        // Subtitle "100-1 (Fall 2011)"
+        #section-tabs-header-subtitle {
+          padding-bottom: 2px;
+          padding-left: 8px;
+        }
+
+        // Tab list items
+        nav > ul#section-tabs > li > a {
+          box-shadow: none;
+          margin: 8px 0;
+          outline: none;
+          padding: 4px 6px;
+          &:not(.active) {
+            border-left: 2px solid white;
+          }
+        }
+      }
+    }
+
+    /* Main content --------------------------------------------------------- */
+    div#content {
+      margin-top: $gap-y-lg;
+
+      // Title bar with search and expand/collapse toggle
+      .header-bar {
+        border-bottom: none;
+        display: flex;
+        padding: 0;
+
+        .header-bar-left {
+          flex: 1;
+          padding: 0 calc($gap-x / 1.5) 0 0; // Not using flex-gap due to hidden pseudo elems
+
+          input {
+            border-radius: variables.$radius-md;
+            display: block;
+          }
+        }
+
+        .header-bar-right {
+          padding: 0;
+
+          // Expand/collapse toggle button
+          button#expand_collapse_all {
+            border-radius: variables.$radius-md;
+            font-size: 14px;
+          }
+        }
+      }
+
+      // Module items
+      #context_modules .context_module {
+        border-radius: variables.$radius-md;
+        margin: 0;
+        margin-top: $gap-y-lg;
+        overflow: hidden;
+        padding: 0;
+        transition: box-shadow 0.2s ease-in-out;
+
+        &:is(:hover, :focus),
+        &:not(.collapsed_module) {
+          box-shadow: variables.$shadow-sm; // Add shadow on hover or when expanded
+        }
+
+        // Module title container
+        div.header {
+          border: none;
+          margin: 0;
+          padding: 0;
+
+          .ig-header-title {
+            padding: 12px 10px;
+          }
+        }
+
+        // Module items
+        div.content > ul.items > li > div.ig-row {
+          border: none;
+          border-bottom: 1px solid #ededed;
+          font-size: 14px;
+          padding: 5px 8px;
+
+          span {
+            font-size: 16px;
+            line-height: 2em;
+          }
+        }
+
+        div.content > ul.items li:last-child > div {
+          border-bottom: none; // Remove border from last module item
+        }
+
+        div.content > ul.items + .footer {
+          display: none; // Hide the footer
+        }
+      }
+    }
+
+    /* Right side menu ------------------------------------------------------ */
+    aside#right-side {
+      margin-top: $gap-y-lg;
+
+      // Mini calendar
+      div.mini_month {
+        border-radius: variables.$radius-lg;
+        box-shadow: variables.$shadow-md;
+        margin: 0;
+        margin-top: $gap-y;
+        padding: 8px 8px 12px;
+
+        // Month title
+        .mini-cal-header {
+          border: none;
+          padding: 6px 4px;
+        }
+
+        // Calendar table
+        .mini_calendar {
+          border: none;
+          height: 150px;
+
+          // Day cell for today
+          .mini_calendar_day.today {
+            background-color: rgb(229, 242, 248);
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Left menu expanded
+   -------------------------------------------------------------------------- */
+body.course-menu-expanded:not(.ic-no-flex-layout) #wrapper #main {
+  @media (min-width: 768px) {
+    margin-left: $course-menu-width;
+  }
+}
