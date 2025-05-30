@@ -14,7 +14,6 @@ $gap-y: variables.$padding-page-md;
    ========================================================================== */
 
 #wrapper {
-  overflow-x: hidden;
   padding: variables.$padding-page-sm;
   transition: variables.$transition;
 
@@ -215,7 +214,7 @@ $gap-y: variables.$padding-page-md;
           border-radius: variables.$radius-lg;
           box-shadow: variables.$shadow-md;
           padding: 14px 16px 18px;
-          margin-top: $gap-y;
+          margin: $gap-y 0;
 
           // Section title bar
           .h2.shared-space {
@@ -258,10 +257,10 @@ $gap-y: variables.$padding-page-md;
 
         /* Grey buttons ----------------------------------------------------- */
         a.button-sidebar-wide {
-          border-radius: variables.$radius-sm;
+          border-radius: variables.$radius-md;
           font-size: 14px;
           line-height: 20px;
-          margin-bottom: 8px;
+          margin: 0 0 8px;
 
           i {
             margin: 0 6px 0 0;
