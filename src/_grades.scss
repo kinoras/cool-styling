@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Course grades page
+   ========================================================================== */
+
+div#content {
+  /* Grade table ------------------------------------------------------------ */
+  #grade-summary-content #assignments table#grades_summary {
+    tr.student_assignment > td.due {
+      white-space: normal; // Allow line breaks in due date cells
+    }
+  }
+}
