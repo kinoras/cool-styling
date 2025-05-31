@@ -5,7 +5,7 @@ $gap-y: variables.$padding-page-md;
 $gap-y-lg: calc($gap-y * 1.5);
 
 $course-header-height: 72px;
-$course-extra-inset-left: calc(variables.$padding-page-md / 2);
+$course-extra-inset-left: calc(variables.$padding-page-md / 3);
 $course-menu-width: 180px;
 
 /* ==========================================================================
@@ -140,8 +140,9 @@ $course-menu-width: 180px;
         }
 
         // Module items
-        div:is(.content, .assignment-list) {
-          > ul > li > div.ig-row {
+        div:is(.content, .assignment-list) > ul,
+        ul:is(#assignment-quizzes, #surveys-quizzes) {
+          > li > div.ig-row {
             border: none;
             border-bottom: variables.$border-sm;
             font-size: 14px;
@@ -165,11 +166,11 @@ $course-menu-width: 180px;
             }
           }
 
-          > ul > li:last-child > div {
+          > li:last-child > div {
             border-bottom: none; // Remove border from last module item
           }
 
-          > ul + .footer {
+          + .footer {
             display: none; // Hide the footer
           }
         }
