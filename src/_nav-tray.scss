@@ -1,0 +1,77 @@
+@use "variables";
+
+$spacing-sm: variables.$header-width-compact + variables.$padding-page-md * 2;
+$spacing-lg: variables.$header-width-expanded + variables.$padding-page-md * 2;
+
+$panel-padding-x: 20px;
+$panel-padding-y: 24px;
+
+/* ==========================================================================
+   Navigation panel (Desktop)
+   ========================================================================== */
+
+#nav-tray-portal > span > span {
+  @media screen and (min-width: 768px) {
+    box-shadow: none;
+    overflow: unset;
+    background: rgba(255, 255, 255, 0);
+
+    .navigation-tray-container {
+      position: relative;
+
+      // Close button
+      > span {
+        right: 0;
+        top: 0;
+
+        > button {
+          margin-right: calc($panel-padding-x - 4px);
+          margin-top: calc($panel-padding-y - 3px);
+
+          &::before {
+            content: unset;
+          }
+        }
+      }
+
+      // Content wrapper
+      .tray-with-space-for-global-nav {
+        background: rgb(255, 255, 255);
+        box-shadow: variables.$shadow-lg;
+        border-radius: variables.$radius-lg;
+        height: calc(100vh - variables.$padding-page-md * 2);
+        margin-block: variables.$padding-page-md;
+        margin-left: $spacing-sm;
+
+        // Content
+        > div {
+          padding: $panel-padding-y $panel-padding-x;
+
+          // Descriptive text
+          > div {
+            font-size: 14px; // Smaller text for description
+          }
+
+          // Profile name
+          > span h2 {
+            margin-top: 16px;
+          }
+
+          > *:not(hr) {
+            margin-inline: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Additional margin for expanded header
+   ========================================================================== */
+body.primary-nav-expanded #nav-tray-portal > span > span {
+  @media (min-width: 768px) {
+    .navigation-tray-container .tray-with-space-for-global-nav {
+      margin-left: $spacing-lg;
+    }
+  }
+}

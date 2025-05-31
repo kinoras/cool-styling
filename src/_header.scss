@@ -10,7 +10,7 @@ $link-height-expanded: 65px;
 
 #header {
   border-radius: variables.$radius-lg;
-  box-shadow: variables.$shadow-lg;
+  box-shadow: variables.$shadow-xl;
   color: black;
   height: calc(100% - variables.$padding-page-md * 2);
   margin: variables.$padding-page-md;
