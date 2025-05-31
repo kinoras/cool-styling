@@ -200,9 +200,25 @@ $gap-y: variables.$padding-page-md;
               margin-bottom: 8px;
 
               div.ToDoSidebarItem__Info {
-                div.ToDoSidebarItem__Title > a {
-                  font-weight: 600;
-                  padding: 0;
+                margin-top: 2px;
+
+                // Title (todo item name)
+                div.ToDoSidebarItem__Title {
+                  margin-bottom: 2px;
+
+                  > a {
+                    text-decoration: none;
+                    
+                    span {
+                      font-size: 15px;
+                      font-weight: 700;
+                    }
+                  }
+                }
+
+                // Subtitle (course name)
+                div.ToDoSidebarItem__Title + span {
+                  font-weight: 500;
                 }
               }
 
