@@ -45,6 +45,11 @@ $gap-y: variables.$padding-page-md;
             min-height: 0;
             padding: 10px 16px 0 0;
 
+            // The large "Dashboard" title
+            > span > span:not(:last-child) {
+              display: none; // Hide it
+            }
+
             button {
               opacity: 0.05; // Make the dashboard view switch slightly visible
             }
