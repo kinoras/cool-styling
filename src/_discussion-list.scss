@@ -1,0 +1,119 @@
+@use "variables";
+
+$gap-y: variables.$padding-page-md;
+$gap-y-lg: calc($gap-y * 1.5);
+
+/* ==========================================================================
+   Course discussion list page
+   ========================================================================== */
+
+#content .discussions-v2__wrapper {
+  > span {
+    margin: 0;
+
+    /* Discussion list wrapper
+       ---------------------------------------------------------------------- */
+    > div {
+      border: 0;
+      border-radius: variables.$radius-md;
+      box-shadow: variables.$shadow-sm;
+      margin-top: $gap-y-lg;
+      overflow: hidden;
+      padding: 0;
+
+      // Discussion list container
+      .discussions-container__wrapper > span > div {
+        // Discussion list title
+        > button {
+          background: #f5f5f5;
+          padding: 12px 10px;
+          &::before {
+            content: unset; // Remove the clicking outlines
+          }
+
+          // Expansion icon
+          svg {
+            margin: 0 1px;
+            scale: 0.75;
+          }
+
+          // Activiity sorting text on the right
+          .recent-activity-text-container span {
+            font-size: 14px;
+            padding-right: 4px;
+          }
+        }
+
+        // Discussion list content
+        > div {
+          padding: 0;
+
+          // Discussion entries
+          > div > div:not(.discussions-v2__container-image) {
+            border-bottom: variables.$border-sm;
+
+            > span > span {
+              display: flex;
+
+              // Unread indicator (blue dot)
+              > span:first-child {
+                align-self: center;
+                margin: 0;
+                
+                > span {
+                  height: 8px;
+                  margin: 9px 3px 9px 12px;
+                  position: relative;
+                  width: 8px;
+                }
+              }
+
+              > span:not(:first-child) {
+                flex: 1;
+
+                // Discussion content
+                div.ic-discussion-row {
+                  box-shadow: none;
+                  flex: 1;
+                  padding: 10px 8px;
+
+                  span.ic-drag-handle-container {
+                    padding: 0;
+                  }
+
+                  span.ic-discussion-content-container > span {
+                    *:not(h3 > a) span {
+                      font-size: 14px; // Make text smaller except for the title
+                    }
+
+                    > span:first-child {
+                      display: flex;
+                      gap: 4px;
+
+                      > span:first-child {
+                        flex: 1;
+                      }
+
+                      // Discussion title
+                      h3 > a > span {
+                        display: inline-block;
+                        font-size: 16px;
+                        font-weight: 600;
+                        margin-bottom: 2px;
+                      }
+
+                      // Unread badge
+                      span.ic-unread-badge {
+                        translate: 0 2px;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

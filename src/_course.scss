@@ -141,7 +141,7 @@ $course-menu-width: 180px;
         div:is(.content, .assignment-list) {
           > ul > li > div.ig-row {
             border: none;
-            border-bottom: 1px solid #ededed;
+            border-bottom: variables.$border-sm;
             font-size: 14px;
 
             // Icon & e.g. Course content items
