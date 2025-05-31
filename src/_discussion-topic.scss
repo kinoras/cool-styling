@@ -1,0 +1,353 @@
+@use "variables";
+
+$gap-y: variables.$padding-page-md;
+$gap-y-lg: calc($gap-y * 1.5);
+
+$unread-badge-height: 20px;
+$unread-badge-width: 28px;
+$unread-badge-radius: variables.$radius-sm;
+
+// Style: Toolbar button
+.tool-button {
+  border-radius: variables.$radius-sm;
+  cursor: pointer;
+  margin: 0;
+
+  span {
+    display: inline-block;
+    line-height: 1;
+  }
+
+  i + span {
+    margin-left: 6px; // Space between icon and text
+  }
+}
+
+// Component: Reply action areas
+.discussion-entry-reply-area {
+  border: none;
+  margin-inline: 12px;
+  padding-bottom: 12px;
+  padding-inline: 0;
+
+  // Reply button area
+  &.hide-if-replying {
+    padding-top: 12px;
+    a {
+      @extend .tool-button;
+      display: inline-block;
+    }
+  }
+
+  // Reply input area
+  &.show-if-replying {
+    border-top: variables.$border-dark;
+
+    // Reply form
+    form.discussion-reply-form {
+      margin-top: -16px;
+      padding: 0 4px 4px;
+
+      // Input fields
+      .tox-edit-area {
+        border-radius: variables.$radius-sm;
+      }
+
+      // Action buttons
+      div.discussion-reply-buttons > .btn {
+        @extend .tool-button;
+        font-size: 16px;
+        margin-left: 8px;
+        padding: 6px 12px;
+      }
+    }
+  }
+}
+
+// Component: Unread count badge
+.new-and-total-badge {
+  width: calc($unread-badge-width * 2);
+  text-align: center;
+
+  > :not(.screenreader-only) {
+    border-radius: 0;
+    height: $unread-badge-height;
+    font-size: 12px;
+    line-height: calc($unread-badge-height - 1px);
+    letter-spacing: 0;
+    margin: 0;
+    padding: 0;
+    width: $unread-badge-width;
+  }
+
+  .new-items {
+    border-bottom-left-radius: $unread-badge-radius;
+    border-top-left-radius: $unread-badge-radius;
+    padding-left: 1px;
+
+    &[title="沒有未讀回覆。"]::before,
+    &[title="No unread replies."]::before {
+      content: "0"; // Show 0 when there are no unread replies
+    }
+  }
+
+  .total-items {
+    background: #e5f2f8;
+    border-bottom-right-radius: $unread-badge-radius;
+    border-top-right-radius: $unread-badge-radius;
+    color: #333333;
+    padding-right: 1px;
+  }
+}
+
+/* ==========================================================================
+   Course discussion topic page
+   ========================================================================== */
+
+#content {
+  #discussion-managebar {
+    display: none;
+  }
+
+  #discussion_container {
+    /* Original poster
+       ---------------------------------------------------------------------- */
+    article#discussion_topic {
+      background: white;
+      border-radius: variables.$radius-lg;
+      box-shadow: variables.$shadow-md;
+      display: grid;
+      grid-template-areas: "c c" "r t" "s s";
+
+      /* Topic content ------------------------------------------------------ */
+      .entry-content {
+        border: none;
+        border-bottom: variables.$border-dark;
+        margin: 0 12px;
+        grid-area: c;
+        padding: 16px 4px 10px;
+
+        // Original poster's info
+        header {
+          padding: 0;
+
+          div.discussion-header-content {
+            padding: 0;
+          }
+        }
+
+        // Text usually saying "closed for comments"
+        div.discussion-fyi {
+          margin-top: 8px;
+        }
+      }
+
+      /* Topic tool wrapper ------------------------------------------------- */
+      #discussion-toolbar {
+        background: transparent;
+        grid-area: t;
+        padding: 12px;
+
+        // Tool container
+        .headerBar {
+          border: none;
+          background: transparent;
+          float: right;
+          min-height: unset;
+          padding: 0;
+
+          // Buttons
+          .discussion_subscribe > a,
+          .headerBar__controls > button,
+          .headerBar__controls > label:not(.screenreader-only) {
+            @extend .tool-button;
+            margin-left: 8px;
+          }
+
+          .headerBar__controls {
+            display: flex;
+            margin-right: 4px;
+
+            input {
+              border-radius: variables.$radius-sm;
+              height: unset;
+            }
+          }
+        }
+
+        .headerBar .discussion_subscribe {
+          margin: 0;
+          padding: 0;
+        }
+      }
+
+      /* Reply button area -------------------------------------------------- */
+      .discussion-entry-reply-area.hide-if-replying {
+        grid-area: r;
+      }
+
+      /* Reply input area --------------------------------------------------- */
+      .discussion-entry-reply-area.show-if-replying {
+        grid-area: s;
+      }
+    }
+
+    /* Responses
+       ---------------------------------------------------------------------- */
+    #discussion_subentries {
+      margin-left: -24px;
+      padding-left: 0px;
+
+      // Response entries
+      > ul.discussion-entries > li.entry {
+        border: none;
+        border-radius: variables.$radius-lg;
+        box-shadow: variables.$shadow-md;
+
+        /* Unread indicator ------------------------------------------------- */
+        article.discussion_entry .discussion-read-state-btn {
+          z-index: 100;
+          left: -28px;
+          top: 14px;
+
+          // The indicator dot
+          .discussion-read-state {
+            border: none;
+          }
+        }
+
+        /* Response --------------------------------------------------------- */
+        > article.discussion_entry {
+          background: transparent;
+          padding: 0;
+
+          // Response poster's info
+          header {
+            background: #f5f5f5;
+            border-top-left-radius: variables.$radius-lg;
+            border-top-right-radius: variables.$radius-lg;
+            padding: 16px;
+
+            // I don't know what this is
+            a.pad-box-mini {
+              padding: 0;
+            }
+
+            // Poster avatar
+            a.avatar {
+              height: 38px;
+              margin: 0;
+              width: 38px;
+            }
+
+            div.discussion-header-content {
+              padding: 0;
+
+              div.discussion-header__metadata {
+                margin-left: 12px;
+
+                // Date of posting
+                div.discussion-pubdate {
+                  margin-top: 2px;
+                  line-height: 1;
+                }
+              }
+
+              // More actions trigger
+              div.admin-links > a {
+                margin: 7px -8px 7px 10px;
+              }
+            }
+          }
+
+          header + div {
+            padding: 4px 16px 16px;
+          }
+
+          div.entry-controls {
+            padding: 0 16px;
+
+            > a {
+              display: inline-block;
+              margin-bottom: 16px;
+            }
+          }
+        }
+
+        /* Replies ---------------------------------------------------------- */
+        > div.replies {
+          padding-inline: 12px;
+
+          // Single reply entry
+          ul.discussion-entries > li.entry {
+            border-top: variables.$border-dark;
+
+            .discussion_entry {
+              background: transparent;
+              margin-inline: -12px;
+              padding: 16px 0 0 2px;
+
+              .entry-content {
+                padding: 0;
+
+                header {
+                  padding: 0 16px;
+
+                  a.pad-box-mini {
+                    padding: 0;
+                  }
+
+                  a.avatar {
+                    height: 36px;
+                    margin: 0;
+                    width: 36px;
+                  }
+
+                  .pull-left {
+                    margin: 0 0 0 12px;
+                  }
+
+                  .discussion-pubdate {
+                    line-height: 1.15;
+                  }
+
+                  a.al-trigger {
+                    margin-right: -8px;
+                  }
+                }
+
+                header + div {
+                  padding: 2px 16px 16px 64px;
+                }
+
+                div.entry-controls {
+                  padding: 0 16px 0 64px;
+
+                  > a {
+                    display: inline-block;
+                    margin-bottom: 16px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        /* Reply action buttons --------------------------------------------- */
+        div.bottom-reply-with-box > div.discussion-entry-reply-area {
+          border-top: variables.$border-dark;
+        }
+
+        .discussion_entry.read .discussion-read-state {
+          background: #f5f5f5; // Light grey background (instead of none) if read
+          border: none;
+        }
+
+        &.collapsed > article.discussion_entry header {
+          border-bottom-left-radius: variables.$radius-lg;
+          border-bottom-right-radius: variables.$radius-lg;
+        }
+      }
+    }
+  }
+}
