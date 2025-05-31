@@ -12,9 +12,10 @@ $panel-padding-y: 24px;
 
 #nav-tray-portal > span > span {
   @media screen and (min-width: 768px) {
+    background: rgba(255, 255, 255, 0);
     box-shadow: none;
     overflow: unset;
-    background: rgba(255, 255, 255, 0);
+    width: 440px;
 
     .navigation-tray-container {
       position: relative;
@@ -63,6 +64,14 @@ $panel-padding-y: 24px;
         }
       }
     }
+  }
+
+  @media screen and (min-width: 1366px) {
+    width: 460px;
+  }
+
+  @media screen and (min-width: 1920px) {
+    width: 480px;
   }
 }
 
