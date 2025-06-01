@@ -1,8 +1,16 @@
-# Cool Styling
+<p align="center">
+   <img alt="Cool Styling" src="images/logo.svg" width="200px">
+</p>
 
-## 🎨 Features
+<p align="center">
+  My SCSS stylesheet for enhancing and modernising the NTU COOL interface.
+</p>
 
-Cool Styling is my personal stylesheet designed to enhance and modernize the NTU COOL interface, making it more visually appealing.
+<p align="center">
+   <img alt="Interface showcase" src="images/interface.png">
+</p>
+
+---
 
 ## 🛠️ How to compile
 
@@ -38,5 +46,4 @@ To apply the custom styles to NTU COOL, use a browser extension (like [Stylus](h
 ## ⚠️ Disclaimer
 
 This project works by overriding the default styles of NTU COOL.  
-**If the NTU COOL team updates their website code, some styles may break, and certain functions may even become unusable.**  
-Use at your own risk.
+**If the NTU COOL team updates their website code, some styles may break, and certain functions may even become unusable.**
